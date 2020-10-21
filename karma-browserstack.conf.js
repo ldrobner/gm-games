@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 const karmaConfig = require("./tools/lib/karmaConfig");
 const browserStack = require("../../.browserstack.json"); // eslint-disable-line import/no-unresolved
 
@@ -21,7 +19,7 @@ const customLaunchers = [
 	{
 		base: "BrowserStack",
 		browser: "safari",
-		browser_version: "11.1", // Works back to 10 currently
+		browser_version: "11.1", // Works back to 10 currently (except fetch)
 		os: "OS X",
 		os_version: "High Sierra",
 	},
@@ -30,7 +28,7 @@ const customLaunchers = [
 	return acc;
 }, {});
 
-module.exports = function(config) {
+module.exports = function (config) {
 	config.set({
 		...karmaConfig,
 		browserStack,

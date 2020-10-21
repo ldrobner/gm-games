@@ -10,7 +10,7 @@ Copyright (C) Jeremy Scheff. All rights reserved.
 * Website: <https://basketball-gm.com/> and <https://football-gm.com/>
 * Development: <https://github.com/dumbmatter/gm-games>
 * Discussion: <https://www.reddit.com/r/BasketballGM/> or
-<https://www.reddit.com/r/Football_GM/> or <https://discord.gg/E9HUwbq>
+<https://www.reddit.com/r/Football_GM/> or <https://discord.gg/caPFuM9>
 
 **This project is NOT open source, but it is also not completely closed. Please
 see LICENSE.md for details.**
@@ -44,7 +44,7 @@ License Agreement from YOUR_NAME_HERE (GITHUB_USERNAME_HERE)".
 
 First, make sure you're using [Node.js](https://nodejs.org/) v6 or higher, older
 versions probably won't work. Then, all of the tooling used in development can
-be set up by simply installing [yarn](https://yarnpkg.com/) and running
+be set up by simply installing [Yarn 1](https://classic.yarnpkg.com/) and running
 
     yarn
 

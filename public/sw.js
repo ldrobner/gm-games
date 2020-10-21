@@ -1,15 +1,32 @@
-/* eslint-env serviceworker */
-/* global workbox:false */
+import * as googleAnalytics from "workbox-google-analytics";
+import { ExpirationPlugin } from "workbox-expiration";
+import {
+	cleanupOutdatedCaches,
+	createHandlerBoundToURL,
+	precacheAndRoute,
+} from "workbox-precaching";
+import { CacheFirst } from "workbox-strategies";
+import { NavigationRoute, registerRoute } from "workbox-routing";
 
-importScripts(
-	"https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js",
+registerRoute(
+	new RegExp("/gen/real-player-data.*"),
+	new CacheFirst({
+		cacheName: "real-player-data",
+		plugins: [
+			new ExpirationPlugin({
+				maxEntries: 1,
+				purgeOnQuotaError: true,
+			}),
+		],
+	}),
 );
 
 // Will be filled in by tools/build-sw.js
-workbox.precaching.precacheAndRoute([]);
+precacheAndRoute(self.__WB_MANIFEST);
 
-workbox.routing.registerNavigationRoute("/index.html", {
-	blacklist: [
+const handler = createHandlerBoundToURL("/index.html");
+const navigationRoute = new NavigationRoute(handler, {
+	denylist: [
 		new RegExp("^/files"),
 		new RegExp("^/fonts"),
 		new RegExp("^/gen"),
@@ -19,13 +36,15 @@ workbox.routing.registerNavigationRoute("/index.html", {
 		new RegExp("^/sw.js"),
 	],
 });
+registerRoute(navigationRoute);
 
 // https://developers.google.com/web/tools/workbox/guides/migrations/migrate-from-v3
-workbox.precaching.cleanupOutdatedCaches();
+cleanupOutdatedCaches();
 
-// https://github.com/GoogleChrome/workbox/issues/1646#issuecomment-434393288
-try {
-	workbox.googleAnalytics.initialize();
-} catch (e) {
-	// fail silently
-}
+googleAnalytics.initialize();
+
+self.addEventListener("message", event => {
+	if (event.data === "getSWVersion") {
+		event.ports[0].postMessage("REV_GOES_HERE");
+	}
+});

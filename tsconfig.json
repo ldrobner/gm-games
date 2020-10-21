@@ -1,31 +1,21 @@
 {
 	"compilerOptions": {
 		"target": "esnext",
-		"module": "commonjs",
 		"resolveJsonModule": true,
-		// "allowJs": true,
-		// "checkJs": true,
 		"jsx": "react",
 		"rootDir": "./src",
 		"noEmit": true,
 		"noUnusedLocals": true,
-		// "noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"moduleResolution": "node",
 		"baseUrl": ".",
 		"paths": {
-			"player-names": ["src/deion/worker/data/names-test.json"],
-			"league-schema": ["build/files/league-schema.json"]
+			"player-names": ["src/worker/data/names-test.json"],
+			"league-schema": ["build/files/league-schema.json"],
+			"bbgm-polyfills": ["src/worker/common/polyfills-noop.ts"]
 		},
 		"esModuleInterop": true,
-
-		// "strict": true,
-		// "noImplicitAny": true,
-		"noImplicitThis": true,
-		"alwaysStrict": true,
-		"strictBindCallApply": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictPropertyInitialization": true
+		"strict": true,
+		"importsNotUsedAsValues": "error"
 	}
 }
